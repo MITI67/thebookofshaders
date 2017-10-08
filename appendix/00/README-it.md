@@ -9,7 +9,7 @@ Su **MacOSX** siate sicuri di avere installato [homebrew](http://brew.sh/) e qui
 ```bash
 brew update
 brew upgrade
-brew install git 
+brew install git
 ```
 
 Su **Raspberry Pi** è necessario fare:
@@ -17,7 +17,7 @@ Su **Raspberry Pi** è necessario fare:
 ```bash
 sudo apt-get update
 sudo apt-get upgrade
-sudo apt-get install git-core
+sudo apt-get install git-core glslviewer
 ```
 
 Una volta che avete installato tutto, non vi resta che fare:
@@ -26,7 +26,7 @@ Una volta che avete installato tutto, non vi resta che fare:
 cd ~
 git clone --recursive https://github.com/patriciogonzalezvivo/thebookofshaders.git
 cd thebookofshaders
-git submodule foreach git pull
+git submodule foreach git submodule init && git submodule update
 php -S localhost:8000
 ```
 

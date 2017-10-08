@@ -11,7 +11,7 @@
 vec3 red = vec3(1.0,0.0,0.0);
 red.x = 1.0;
 red.y = 0.0;
-red.z = 0.0; 
+red.z = 0.0;
 ```
 
 以x,y,z定义颜色是不是有些奇怪？正因如此，我们有其他方法访问这些变量——以不同的名字。```.x```, ```.y```, ```.z```也可以被写作```.r```, ```.g```, ```.b``` 和 ```.s```, ```.t```, ```.p```。（```.s```, ```.t```, ```.p```通常被用做后面章节提到的贴图空间坐标）你也可以通过使用索引位置```[0]```, ```[1]``` 和 ```[2]```来访问向量.
@@ -34,7 +34,7 @@ GLSL中向量类型的另一大特点是可以用你需要的任意顺序简单�
 ```glsl
 vec3 yellow, magenta, green;
 
-// Making Yellow 
+// Making Yellow
 yellow.rg = vec2(1.0);  // Assigning 1. to red and green channels
 yellow[2] = 0.0;        // Assigning 0. to blue channel
 
@@ -42,7 +42,7 @@ yellow[2] = 0.0;        // Assigning 0. to blue channel
 magenta = yellow.rbg;   // Assign the channels with green and blue swapped
 
 // Making Green
-green.rgb = yellow.bgb; // Assign the blue channel of Yellow (0) to red and blue channels 
+green.rgb = yellow.bgb; // Assign the blue channel of Yellow (0) to red and blue channels
 ```
 
 #### 个人工具箱
@@ -97,9 +97,9 @@ green.rgb = yellow.bgb; // Assign the blue channel of Yellow (0) to red and blue
 * 用 ```step（）``` 函数在做一个五彩的旗子。
 
 ### HSB
- 
+
 我们不能脱离色彩空间来谈论颜色。正如你所知，除了rgb值，有其他不同的方法去描述定义颜色。
- 
+
 [HSB](http://en.wikipedia.org/wiki/HSL_and_HSV) 代表色相，饱和度和亮度（或称为值）。这更符合直觉也更有利于组织颜色。稍微花些时间阅读下面的 ```rgb2hsv()``` 和 ```hsv2rgb()``` 函数。
 
 将x坐标（位置）映射到Hue值并将y坐标映射到明度，我们就得到了五彩的可见光光谱。这样的色彩空间分布实现起来非常方便，比起RGB，用HSB来拾取颜色更直观。
@@ -112,7 +112,7 @@ HSB原本是在极坐标下产生的（以半径和角度定义）而并非在�
 
 当用到矢量和三角学函数时，```vec2```, ```vec3``` 和 ```vec4```被当做向量对待，即使有时候他们代表颜色。我们开始把颜色和向量同等的对待，事实上你会慢慢发现这种理念的灵活性有着相当强大的用途。
 
-**注意**：如果你想了解，除length（）以外的诸多几何函数，例如：[```distance()```](../glossary/?search=distance), [```dot()```](../glossary/?search=dot), [```cross```](../glossary/?search=cross), [```normalize()```](../glossary/?search=normalize), [```faceforward()```](../glossary/?search=fraceforward), [```reflect()```](../glossary/?search=reflect) 和 [```refract()```](../glossary/?search=refract)。 GLSL也有与向量相关的函数：[```lessThan()```](../glossary/?search=lessThan), [```lessThanEqual()```](../glossary/?search=lessThanEqual), [```greaterThan()```](../glossary/?search=greaterThan), [```greaterThanEqual()```](../glossary/?search=greaterThanEqual), [```equal()```](../glossary/?search=equal) and [```notEqual()```](../glossary/?search=notEqual)。
+**注意**：如果你想了解，除length（）以外的诸多几何函数，例如：[```distance()```](../glossary/?search=distance), [```dot()```](../glossary/?search=dot), [```cross```](../glossary/?search=cross), [```normalize()```](../glossary/?search=normalize), [```faceforward()```](../glossary/?search=faceforward), [```reflect()```](../glossary/?search=reflect) 和 [```refract()```](../glossary/?search=refract)。 GLSL也有与向量相关的函数：[```lessThan()```](../glossary/?search=lessThan), [```lessThanEqual()```](../glossary/?search=lessThanEqual), [```greaterThan()```](../glossary/?search=greaterThan), [```greaterThanEqual()```](../glossary/?search=greaterThanEqual), [```equal()```](../glossary/?search=equal) and [```notEqual()```](../glossary/?search=notEqual)。
 
 一旦我们得到角度和长度，我们需要单位化这些值：0.0到1.0。在27行，[```atan(y,x)```](../glossary/?search=atan) 会返回一个介于-PI到PI的弧度值（-3.14 to 3.14），所以我们要将这个返回值除以 ```TWO_PI```（在code顶部定义了）来得到一个-0.5到0.5的值。这样一来，用简单的加法就可以把这个返回值最终映射到0.0到1.0。半径会返回一个最大值0.5（因为我们计算的是到视口中心的距离，而视口中心的范围已经被映射到0.0到1.0），所以我们需要把这个值乘以二来得到一个0到1.0的映射。
 
@@ -137,12 +137,10 @@ HSB原本是在极坐标下产生的（以半径和角度定义）而并非在�
 在进入下一章之前让我们停下脚步回顾下。复习下之前例子的函数。你会注意到变量类型之前有个限定符 ```in```，在这个 [*qualifier*](http://www.shaderific.com/glsl-qualifiers/#inputqualifier) (限定符)例子中它特指这个变量是只读的。在之后的例子中我们会看到可以定义一个 ```out``` 或者 ```inout```变量。最后这个 ```inout```，再概念上类似于参照输入一个变量，这意味着我们有可能修改一个传入的变量。
 
 ```glsl
-int newFunction(in vec4 aVec4,   // read-only 
+int newFunction(in vec4 aVec4,   // read-only
                 out vec3 aVec3,    // write-only
                 inout int aInt);   // read-write
-``` 
+```
 
 
 或许你还不相信我们可以用所有这些元素来画一些炫酷的东西。下一章我们会学习如何结合所有这些技巧通过融合 (*blending*) 空间来创造几何形状。没错。。。融合(*blending*) 空间。
-
-

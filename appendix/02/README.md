@@ -1,11 +1,11 @@
 ## How to print this book?
 
 Let’s say you don’t want to navigate or interact with the examples and you just want a good old fashion text book which you can read on the beach or on your commute to the city. In that case you can print this book.
- 
+
 
 #### Installing glslViewer
 
-For printing this book you need first to parse it. For that you will need [```glslViewer```](https://github.com/patriciogonzalezvivo/glslViewer) a console shader tool that will compile and transform the shader examples into images.
+For printing this book you need first to parse it. For that you will need [`glslViewer`](https://github.com/patriciogonzalezvivo/glslViewer) a console shader tool that will compile and transform the shader examples into images.
 
 In **MacOSX** get sure to have [homebrew](http://brew.sh/) installed and then on your terminal do:
 
@@ -14,42 +14,37 @@ brew update
 brew upgrade
 brew tap homebrew/versions
 brew install glfw3
-cd ~ 
+cd ~
 git clone http://github.com/patriciogonzalezvivo/glslViewer.git
 cd glslViewer
 make
 make install
 ```
 
-On **Raspberry Pi** you need to do:
+On **Raspberry Pi** you need to get [Raspbian](https://www.raspberrypi.org/downloads/raspbian/), a Debian-based Linux distribution made for Raspberry Pi and then do:
 
 ```bash
 sudo apt-get update
 sudo apt-get upgrade
-sudo apt-get install git-core
-cd ~ 
-git clone http://github.com/patriciogonzalezvivo/glslViewer.git
-cd glslViewer
-make
-make install
+sudo apt-get install git-core glslviewer
 ```
 
-#### Installing Latex Engine and Pandoc
+#### Installing Python 2.7, Latex Engine and Pandoc
 
 For parsing the Markdown chapters into Latex and then into a PDF file we will use Xetex Latex Engine and Pandoc.
 
 In **MacOSX**:
 
-Download and Install [basictex & MacTeX-Additions](http://www.tug.org/mactex/morepackages.html) and then install [Pandoc](http://johnmacfarlane.net/pandoc/) by:
- 
+Download and Install [basictex & MacTeX-Additions](http://www.tug.org/mactex/morepackages.html) and then install [Pandoc](http://johnmacfarlane.net/pandoc/) and Python by:
+
 ```bash
-brew install pandoc
+brew install pandoc python2.7
 ```
 
-On **Raspberry Pi**:
+On **Raspberry Pi** (Raspbian):
 
 ```bash
-sudo apt-get install texlive-xetex pandoc
+sudo apt-get install texlive-xetex pandoc python2.7
 ```
 
 #### Compile the book into a pdf and print it
@@ -65,4 +60,4 @@ cd thebookofshaders
 make
 ```
 
-If everything goes well, you will see a ```book.pdf``` file which you can read on your favorite device or print. 
+If everything goes well, you will see a `book.pdf` file which you can read on your favorite device or print.

@@ -34,8 +34,8 @@
 
 * Generative designs
     * [ランダム](10/?lan=jp)
-    * [Noise](11/?lan=jp)
-    * [Cellular noise](12/)
+    * [ノイズ](11/?lan=jp)
+    * [セルラーノイズ](12/?lan=jp)
     * [Fractional brownian motion](13/)
     * Fractals
 

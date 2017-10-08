@@ -10,7 +10,7 @@ Se siete pratici con i paradigmi di programmazione orientata agli oggetti, proba
 vec3 red = vec3(1.0,0.0,0.0);
 red.x = 1.0;
 red.y = 0.0;
-red.z = 0.0; 
+red.z = 0.0;
 ```
 
 Definire il colore usando una notazione *x*, *y* e *z* può essere fuorviante e creare confusione, vero? Per questo esistono altri modi  di accedere alle stesse informazioni, con nomi diversi. I valori di ```.x```, ```.y``` e ```.z``` possono anche essere chiamati ```.r```, ```.g``` e ```.b```, e ```.s```, ```.t``` e ```.p```.  (```.s```, ```.t``` e ```.p``` solitamente sono usati per  le coordinate spaziali di una texture, che vedremo nel prossimo capitolo). Puoi anche accedere ai valori in un vettore usando gli indici di posizione ```[0]```, ```[1]``` e ```[2]```.
@@ -44,7 +44,7 @@ magenta = yellow.rbg;   // Invertite il canale del verde con quello del blu
 green.rgb = yellow.bgb; // Assegnare il canale blu del giallo (0) ai canali rosso e blu
 ```
 
-#### Per la vostra cassetta degli attrezzi 
+#### Per la vostra cassetta degli attrezzi
 
 Potreste non essere abituati a selezionare i colori attraverso numeri - di sicuro questo processo potrebbe risultare controintuitivo. Per vostra fortuna esistono tanti programmi che semplificano questo lavoro. Trovatene uno che vada incontro ai vostri bisogni e usatelo per ottenere colori in formato ```vec3``` 0 ```vec4``` format. Per esempio, qui trovate i templates che io uso su [Spectrum](http://www.eigenlogik.com/spectrum/mac):
 
@@ -75,7 +75,7 @@ La funzione [```mix()```](../glossary/?search=mix) ha molto da offrire. Invece d
 
 Guardate l'esempio seguente. Così come negli esempi nel capitolo precedente, stiamo collegando la transizione alla *x* normalizzata e la visualizziamo con una linea. In questo momento tutti e tre i canali seguono la medesima linea.
 
-Ora, togliete il commento alla riga 25 e guardate cosa succede. Poi provate a togliere il commento alle righe 26 e 27. Ricordate che le linee visualizzano la quantità di ```colorA``` e ```colorB``` da mescolare per ogni canale. 
+Ora, togliete il commento alla riga 25 e guardate cosa succede. Poi provate a togliere il commento alle righe 26 e 27. Ricordate che le linee visualizzano la quantità di ```colorA``` e ```colorB``` da mescolare per ogni canale.
 
 <div class="codeAndCanvas" data="gradient.frag"></div>
 
@@ -103,11 +103,11 @@ Mappando la posizione sull'asse x con la tonalità e la posizione sull'asse y co
 
 ### HSB nelle coordinate polari
 
-Originariamente HSB è stato creato per essere rappresentato in coordinate polari (basate su angoli e raggio) e non in coordinate cartesiane (basate su x e y). Per unire la nostra funzione HSB alle coordinate polari, dobbiamo ottenere l'angolo e la distanza dal centro del canvas per ogni coordinata pixel. Per far questo usiamo la funzione [```length()```](../glossary/?search=length) e [```atan(y,x)```](../glossary/?search=atan) (che è la versione GLSL della più comune ```atan2(y,x)```). 
+Originariamente HSB è stato creato per essere rappresentato in coordinate polari (basate su angoli e raggio) e non in coordinate cartesiane (basate su x e y). Per unire la nostra funzione HSB alle coordinate polari, dobbiamo ottenere l'angolo e la distanza dal centro del canvas per ogni coordinata pixel. Per far questo usiamo la funzione [```length()```](../glossary/?search=length) e [```atan(y,x)```](../glossary/?search=atan) (che è la versione GLSL della più comune ```atan2(y,x)```).
 
 Quando si usano vettori e funzioni trigonometriche, ```vec2```, ```vec3``` e ```vec4``` sono considerati come vettori anche quando rappresentano i colori. Inizieremo a considerare in modo simile i colori e i vettori, e in realtà troverete che questa flessibilità concettuale è molto potente.
 
-**Nota:** se ve lo stavate chiedendo, esistono altre funzioni geometriche oltre a [```length```](../glossary/?search=length), come: [```distance()```](../glossary/?search=distance), [```dot()```](../glossary/?search=dot), [```cross```](../glossary/?search=cross), [```normalize()```](../glossary/?search=normalize), [```faceforward()```](../glossary/?search=fraceforward), [```reflect()```](../glossary/?search=reflect) e [```refract()```](../glossary/?search=refract). Anche GLSL ha speciali funzioni vettoriali come: [```lessThan()```](../glossary/?search=lessThan), [```lessThanEqual()```](../glossary/?search=lessThanEqual), [```greaterThan()```](../glossary/?search=greaterThan), [```greaterThanEqual()```](../glossary/?search=greaterThanEqual), [```equal()```](../glossary/?search=equal) e [```notEqual()```](../glossary/?search=notEqual).
+**Nota:** se ve lo stavate chiedendo, esistono altre funzioni geometriche oltre a [```length```](../glossary/?search=length), come: [```distance()```](../glossary/?search=distance), [```dot()```](../glossary/?search=dot), [```cross```](../glossary/?search=cross), [```normalize()```](../glossary/?search=normalize), [```faceforward()```](../glossary/?search=faceforward), [```reflect()```](../glossary/?search=reflect) e [```refract()```](../glossary/?search=refract). Anche GLSL ha speciali funzioni vettoriali come: [```lessThan()```](../glossary/?search=lessThan), [```lessThanEqual()```](../glossary/?search=lessThanEqual), [```greaterThan()```](../glossary/?search=greaterThan), [```greaterThanEqual()```](../glossary/?search=greaterThanEqual), [```equal()```](../glossary/?search=equal) e [```notEqual()```](../glossary/?search=notEqual).
 
 Una volta che otteniamo l'angolo e la lunghezza dobbiamo "normalizzare" i loro valori in una scala tra 0.0 e 1.0. alla riga 27, [```atan(y,x)```](../glossary/?search=atan) restituirà un angolo in radianti tra –PI e PI (-3.14 e 3.14), quindi dobbiamo dividere questo numero per ```TWO_PI``` (definito nella parte superiore del codice) per ottenere valori tra -0.5 e 0.5, che con una semplice addizione cambiamo nella scala desiderata tra 0.0 e 1.0. Il raggio restituirà un massimo di 0.5 (perché stiamo calcolando la distanza dal centro del punto di osservazione), quindi abbiamo bisogno di raddoppiare questa distanza (moltiplicando per due) per ottenere un massimo di 1.0.
 

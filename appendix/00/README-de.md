@@ -9,7 +9,7 @@ Unter **MacOSX** benötigst Du dafür [homebrew](http://brew.sh/). Sobald das Pa
 ```bash
 brew update
 brew upgrade
-brew install git 
+brew install git
 ```
 
 Auf einem **RaspberryPi** gibst Du folgendes ein:
@@ -17,7 +17,7 @@ Auf einem **RaspberryPi** gibst Du folgendes ein:
 ```bash
 sudo apt-get update
 sudo apt-get upgrade
-sudo apt-get install git-core
+sudo apt-get install git-core glslviewer
 ```
 
 Hast Du alles beisammen, musst Du lediglich folgende Befehle aufrufen, um das *Book of Shaders* per GIT auf Deinen Rechner zu laden und den Server zur Anzeige des Inhalts zu starten:
@@ -26,7 +26,7 @@ Hast Du alles beisammen, musst Du lediglich folgende Befehle aufrufen, um das *B
 cd ~
 git clone --recursive https://github.com/patriciogonzalezvivo/thebookofshaders.git
 cd thebookofshaders
-git submodule foreach git pull
+git submodule foreach git submodule init && git submodule update
 php -S localhost:8000
 ```
 

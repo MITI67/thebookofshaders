@@ -1,9 +1,9 @@
 default: clean all
 
-clean: 
+clean:
 	rm -rf */tmp.md
 	rm -rf */tmp*.png
 	rm -rf book.*
 
 all:
-	python src/parseBook.py
+	python2.7 src/parseBook.py
